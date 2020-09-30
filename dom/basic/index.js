@@ -10,3 +10,5 @@ let btn = document.getElementById("submit")
 btn.addEventListener("click", e => {
     alert("click")
 })
+
+let arr = ["val 1", "val 2", "val 3", "val 4","val 5", "val 6","val 7", "val 8"]

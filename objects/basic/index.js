@@ -23,6 +23,7 @@ obj2.marks = 56
 function Creater(name,marks){
 this.name = name
 this.marks = marks
+this.hello = ()=>"Hi"
 }
 
 let obj3 = new Creater("a1",22)
@@ -32,6 +33,7 @@ let obj5 = new Creater("a3",28)
 Creater.prototype.section = "A"
 
 // console.log("obj5",obj5.section)
+console.log(new Creater().hello())
 
 
 
