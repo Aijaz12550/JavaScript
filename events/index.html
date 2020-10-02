@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+  </head>
+  <body>
+    <button id='btn'>click</button>
+
+    <textarea id="textArea">
+
+    </textarea>
+
+    <p 
+    onmouseover="this.innerText='mouse over'; this.style.color='#296'"
+    onmouseout="this.innerText='mouse out'; this.style.color='#ef5359'"
+    >no activity</p>
+
+
+    <hr />
+
+    <!-- 
+        # mouse down
+        # mouse up
+     -->
+
+     <!-- 
+         keydown
+         keyup
+      -->
+    
+    <p 
+    onmouseup="this.innerText='mouse down'"
+    >
+ test
+    </p>
+
+
+    <div id='div1'>
+        div1
+
+        <div id="div2">
+            <div id="div3">
+                div3
+            </div>
+            div2
+
+        </div>
+
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
