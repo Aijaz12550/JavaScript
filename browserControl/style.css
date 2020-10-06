@@ -1,0 +1,10 @@
+.header{
+    width: 100%;
+    min-height: 30px;
+    background: #000;
+    color: #fff;
+}
+img{
+    width: 100%;
+    height: auto;
+}
