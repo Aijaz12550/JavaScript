@@ -22,3 +22,7 @@ input.addEventListener("keyup", function(event){
 //     console.log("button clicked");
 // }
 console.log("testing");
+
+calculator.onclick = e => {
+    console.log("click",e.target.value);
+}
