@@ -2,23 +2,42 @@
 
 let input = document.getElementById("input");
 
+let equation = '';
+
+let result = '';
 
 // Typing in the input bar
 input.addEventListener("keyup", function(event){
     if (event.keyCode === 13){
-        let equation = $("input:text").val();
+        equation = $("input:text").val();
         console.log($("input:text").val());
 
-        let result = eval(equation);
-        $("input:text").val(result);        
+        result = eval(equation);
+        $("input:text").val(result);
+        equation = ''       
 
     };
 });
 
 
 // Using buttons
+calculator.onclick = e => {
+    if (e.target.innerText === "="){
+        result = eval(equation);
+        $("input:text").val(result);
+        equation = result;
+    }
 
-// document.getElementsByClassName("btn").onclick=function(){
-//     console.log("button clicked");
-// }
-console.log("testing");
+    else if (e.target.innerText === "C"){
+        equation = '';
+        result = ''
+        $("input:text").val('');
+    }
+
+    else{
+        equation = equation + e.target.innerText
+        $("input:text").val(equation);
+        console.log('equation', equation);
+    }
+
+}

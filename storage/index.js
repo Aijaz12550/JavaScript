@@ -13,11 +13,36 @@
 // let data = localStorage.getItem('data1')
 // alert(data)
 
-let baseUrl = 'https://jsonplaceholder.typicode.com'
+// localStorage.setItem("data1","hello")
+// localStorage.setItem("data2","hello2")
+// localStorage.setItem("data3","hello3")
 
-fetch(`${baseUrl}/todos`).then(res => res.json()).then(data=>{
+for (i=0; i < localStorage.length; i++){
+    console.log(i, localStorage.key(i))
+
+}
+for (let key in localStorage){
+    if (localStorage.hasOwnProperty(key)){
+
+    }
+    console.log(key);
+    // console.log(localStorage.hasOwnProperty(key));
+}
+
+console.log(localStorage.hasOwnProperty())
+let baseUrl = 'http://a7a9bc9ab5e3.ngrok.io/'
+
+fetch(`${baseUrl}api/getData`).then(res => res.json()).then(data=>{
     console.log(data);
 })
 
+fetch(`${baseUrl}api/add`,{
+    method:'POST',
+    body:'hello 123',
+    
+}).then(res => res.json()).then(data=>{
+    console.log(data);
+})
 
+sessionStorage.setItem("session1", "test1")
 
