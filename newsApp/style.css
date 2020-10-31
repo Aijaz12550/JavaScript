@@ -1,0 +1,36 @@
+.news-article{
+    border: 2px;
+    border-radius: 10px;
+    border-color: gray;
+    border-style: solid;
+    margin: 20px;
+    padding: 20px;
+
+}
+
+.news-title{
+    margin: 0;
+    font-size: 25px;
+}
+
+.news-author{
+    font-size: 17px;
+    display: inline-block;
+    margin-right: 15px;
+    margin-top:10px;
+    margin-bottom: 0;
+    color: #4e4e4e;
+}
+
+.news-date{
+    font-size: 17px;
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #4e4e4e;
+}
+
+.news-text{
+    font-size: 20px;
+    color: black;
+}

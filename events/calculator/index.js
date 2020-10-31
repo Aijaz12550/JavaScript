@@ -21,6 +21,7 @@ input.addEventListener("keyup", function(event){
 
 
 // Using buttons
+<<<<<<< HEAD
 calculator.onclick = e => {
     if (e.target.innerText === "="){
         result = eval(equation);
@@ -40,4 +41,14 @@ calculator.onclick = e => {
         console.log('equation', equation);
     }
 
+=======
+
+// document.getElementsByClassName("btn").onclick=function(){
+//     console.log("button clicked");
+// }
+console.log("testing");
+
+calculator.onclick = e => {
+    console.log("click",e.target.value);
+>>>>>>> 10f97fe02502835b9411dfc1d926c865651ea7cb
 }
