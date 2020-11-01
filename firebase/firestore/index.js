@@ -16,8 +16,8 @@ db.collection("users").doc("bio").set({
 })
 
 db.collection("users2").add({
-    name:"asd",
-    age:"as"
+    name:"abc",
+    age:23
 })
 .then(()=>{
     console.log("data added");
@@ -30,6 +30,38 @@ db.collection("users2").add({
 db.collection("users").doc("bio").delete()
 
 
-// db.collection("users2").get().then(data=>{
-//     console.log("data =>",data.docs;
-// })
+// getting data from a document ...
+db.collection("users2").doc("0msvBeYkQSPfx33AViT3").get().then(data=>{
+    console.log("data =>",data.data())
+})
+
+// getting  data from collection
+
+db.collection("users2").get().then(snap=>{
+    snap.forEach(doc=>{
+        // console.log("doc",doc.data(),doc.id,doc);
+    })
+})
+
+
+// queries 
+//  it will give data one time not real time
+db.collection("users2").where("name","==","abc").get().then(snap=>{
+    snap.forEach(doc=>{
+        console.log(" query doc",doc.data(),);
+    })
+})
+
+
+let name = prompt("Enter your name")
+let country = prompt("Enter your country")
+
+
+// add method creates new doc each time with random id
+db.collection("newUsers").add({name,country})
+
+db.collection("users2").onSnapshot(snap=>{
+    snap.forEach(doc=>{
+        console.log(" onSnapshot",doc.data(),);
+    })
+})

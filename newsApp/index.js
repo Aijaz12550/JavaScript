@@ -15,7 +15,7 @@ let getSources = () => {
         console.log("data",data);
         sourcesList.innerHTML = data.sources.map((val,key)=>{
             return `
-            <option >${val.name}</option>
+            <option value="${val.id}" >${val.name}</option>
             `
         })
     })
@@ -41,5 +41,9 @@ fetch(`${baseurl}/articles?source=${source}&apikey=${apiKey}`)
 })
 }
 
+sourcesList.addEventListener("click", event => {
+    console.log("event",event.target.value);
+    updateNews(event.target.value)
+})
 
 

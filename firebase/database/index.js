@@ -1,47 +1,37 @@
-console.log("firebase",firebase);
-console.log("database",firebase.database());
 
-let db = firebase.database()
+const database = firebase.database();
+database.ref("/").child("users/").set("charlot")
 
-// Add Data
-// simply adding some data
+database.ref("/").child("users2/").push({name:"abc"})
 
-// set will replace the refernce if it is present previously otherwise it will create new one.
-db.ref("user").set({age:"yyyy"})
-.then(success => {
-    console.log("data added");
-}).catch(error => {
-    console.log("error",error);
-})
-
-db.ref("company").child("hr").child("manager").push({name:"jhgj",age:33})
-db.ref("company").child("hr").child("Recruiter").push({name:"jhgj",age:33})
-// push method add new data with random key
-db.ref("users").push({name:"new user"}).then(data=>{
-
-}).catch(error => {
-    console.log("error",error);
-})
-
-// function once(a){
-//     if(a === "value"){
-//         jhjhg
-//     }
-// }
-// getting data
-
-// once method is get data one time on network request
-db.ref("company").child("hr").once("value",(snap)=>{
+database.ref("/").child("users2").on("value",snap => {
     console.log("snap",snap.val());
+    let data = []
+    for(let key in snap.val()){
+        data.push({...snap.val()[key],key})
+    }
+    console.log("data",data);
 })
 
-// it gets data real time
-db.ref("company").child("hr").on("value",(snap)=>{
-    console.log("snap on",snap.val());
+
+database.ref("/").child("users2").remove()
+console.log("firebase",database);
+
+const firestore = firebase.firestore();
+
+firestore.collection("cities").doc("LA").set({
+    name: "Los Angeles",
+    state: "CA",
+    country: "USA"
 })
-
-// remove
-db.ref("company").child("hr").remove()
-db.ref("company").set(null);
-
-
+.then(function() {
+    console.log("Document successfully written!");
+})
+.catch(function(error) {
+    console.error("Error writing document: ", error);
+});
+db.collection("cities").doc("DC").delete().then(function() {
+    console.log("Document successfully deleted!");
+}).catch(function(error) {
+    console.error("Error removing document: ", error);
+});
