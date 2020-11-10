@@ -9,13 +9,14 @@ window.addEventListener("load", e => {
     getSources()
 })
 
+
 let getSources = () => {
     fetch(`${baseurl}/sources`)
     .then(res=> res.json()).then(data=>{
         console.log("data",data);
         sourcesList.innerHTML = data.sources.map((val,key)=>{
             return `
-            <option >${val.name}</option>
+            <option onclick = "console.log('id', ${val.id})">${val.name}</option>
             `
         })
     })
@@ -41,5 +42,11 @@ fetch(`${baseurl}/articles?source=${source}&apikey=${apiKey}`)
 })
 }
 
+// document.getElementById("select").addEventListener("click", e=>{
+//     console.log("e", e.target);
+//     updateNews(e.target.key);
+// })
 
+let updateSources = (source) =>{
 
+}
