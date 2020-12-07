@@ -1,0 +1,46 @@
+body{
+    padding: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
+
+}
+
+.box {
+    border: 3px solid rgba(0, 0, 0);
+    font-size: 60px;
+
+    text-align: center;
+}
+
+.corner1{
+    border-top: 0;
+    border-left: 0;
+}
+.corner2{
+    border-top: 0;
+    border-right: 0;
+}
+.corner3{
+    border-left: 0;
+    border-bottom: 0;
+}
+.corner4{
+    border-right: 0;
+    border-bottom: 0;
+}
+.edge1{
+    border-top: 0;
+}
+.edge2{
+    border-left: 0;
+}
+.edge3{
+    border-right: 0;
+}
+.edge4{
+    border-bottom: 0;
+}
