@@ -1,0 +1,61 @@
+body{
+    background-color: turquoise;
+    font-family: 'Padauk', sans-serif;
+
+}
+
+.todo{
+    margin: auto;
+    margin-top: 30px;
+    width: 400px;
+    border: solid;
+    border-color: white;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.title{
+    text-align: center;
+    padding: 6px;
+    margin-top: 0;
+}
+
+#inp{
+    width: 310px;
+    height: 30px;
+    
+    display: block;
+    margin: auto;
+    
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+
+#list{
+    padding-right: 20px;
+}
+
+h3{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 21px;
+}
+
+.btn{
+    color: #27a200;
+    margin-left: 40px;
+    font-size: 25px;
+    float: right;
+    margin-top: 20px;
+}
+
+@media(max-width: 480px){
+    .todo{
+        width: 310px;
+    }
+
+    #inp{
+        width: 270px;
+    }
+}

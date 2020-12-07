@@ -3,6 +3,7 @@ let list = document.getElementById('list')
 inp.addEventListener('keyup', e=>{
     if(e.keyCode === 13){
         addTodo()
+        inp.value='';
     }
 })
 
@@ -21,8 +22,9 @@ const render = item => {
     li.innerHTML = `
     <div>
     <h3 id='hp${item.id}'>${item.todo}</h3>
-    <button onclick="editTodo(${item.id})">Edit</button>
-    <button onclick="deleteTodo(${item.id})">Delete</button>
+    <a onclick="editTodo(${item.id})" class="btn edit"><i class="fas fa-edit"></i></a>
+    <a onclick="deleteTodo(${item.id})" class="btn"><i class="fas fa-check-circle"></i></a>
+    <hr>
     </div>
     `
     ul.appendChild(li)
@@ -38,33 +40,3 @@ const editTodo = (id) => {
     let editedTask = prompt('change', node.innerText)
     node.innerText = editedTask
 }
-
-const factorial = (num) => {
-    let result = 1;
-    for (i=1; i <= num; i++){
-        result = i*result;
-    }
-    console.log(result)
-}
-factorial(5);
-
-let factorize = (num,result=1) => {
-    if(num > 1) {
-        result = result*num
-        console.log(result)
-        return factorize(--num, result)
-    }
-    return result
-}
-
-
-let arr = ['a','b',['c','d',[]]]
-
-let lastItem = arr.pop()
-if(Array.isArray(lastItem)){
-   arr =  arr.concat(lastItem)
-}
-console.log("arr",arr)
-
-
-console.log("==>",Array.isArray(lastItem))
