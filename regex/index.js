@@ -21,3 +21,11 @@ let regx4 = /\d+/g; // ["3783","879"]
 
 console.log("log3", str3.match(regx4));
 // console.log("log4", str3.match(regx4));
+
+//  kkkk-333
+
+let regVanplate = /\b[a-z]{4}-[0-9]{3}\b/g;
+
+let plate = "kkkk-567";
+
+console.log("log 3",regVanplate.test(plate));
