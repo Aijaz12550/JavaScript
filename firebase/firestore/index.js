@@ -15,6 +15,7 @@ db.collection("users").doc("bio").set({
     console.log("error",error);
 })
 
+// it will create random doc name
 db.collection("users2").add({
     name:"abc",
     age:23

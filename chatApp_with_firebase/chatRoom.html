@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="./style/chatRoom.css" />
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
+  </head>
+  <body onload="onRoomLoad();getMessages()">
+    <div class="conatiner">
+        <div style="overflow-y: scroll;" id="scroll-bottom">
+
+            <div class="chat-container" id="chat-cont">
+                
+                
+                
+            </div>
+        </div>
+
+      <div class="send-text">
+        <textarea name="" id="msg" cols="16" rows="5"></textarea>
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

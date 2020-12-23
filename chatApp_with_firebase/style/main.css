@@ -3,6 +3,29 @@
 
 
 body {
-    border: 2px solid green;
     margin: 0;
+}
+#container{
+    display: flex;
+    margin: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(90vh - 30px);
+}
+#listItem{
+    border: 1px solid rgb(59, 57, 57);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background: #eee;
+    min-height: 60px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+#listItem > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
 }
