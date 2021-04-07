@@ -69,16 +69,9 @@ const signupHandler = () => {
 //     console.log("==>",error);
 //   });
 
-const isUserHandler = async () => {
   let user = localStorage.getItem("cid");
 
   // if (user) {
-  //   return;
-  // } else {
-  //   location.replace("signin.html");
-  //   return;
-  // }
-};
 
 const signinHandler = () => {
   console.log("email", email);
@@ -117,12 +110,14 @@ let getUsers = async () => {
     .where("id", "!=", uid)
     .get()
     .then((data) => {
+      let i = 1;
       console.log("data", data);
-      data.forEach((val) => {
-        console.log("val", val.data(), "id", val.id);
+      data.forEach((val, key) => {
+        console.log("val", val.data());
+        let userId = val.id;
         container.innerHTML += `
-        <div id="listItem" onclick="roomHandler('${val.id}')"> 
-        <img src="https://picsum.photos/200/300" >
+        <div id="listItem"  onclick="roomHandler('${userId}')"> 
+        <img src="https://picsum.photos/200/${++i}00" >
         <h3>
         ${val.data().name} 
         </h3>
@@ -135,90 +130,99 @@ let getUsers = async () => {
     });
 };
 
-const roomHandler = (friendId) => {
-  localStorage.setItem("friendId", friendId);
+var objDiv = document.getElementById("tt");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
+        console.log("objDiv.scrollTop",objDiv.scrollTop)
+        console.log("objDiv.scrollTop",objDiv.scrollHeight)
+
+const roomHandler = (id) => {
+  localStorage.setItem("friendId", id);
   location.replace("chatRoom.html");
+  console.log("id ===>", id);
 };
 
 const onRoomLoad = async () => {
   let friendId = localStorage.getItem("friendId");
-  let { uid } = await currentUser();
-  let isRoomExist = false;
+  let { uid } = await dashboardAuth();
+  let roomExist = false;
 
- await db.collection("chatRooms")
+  return db
+    .collection("chatRooms")
+    .where("users." + uid, "==", true)
     .where("users." + friendId, "==", true)
-    .where("users." + uid, "==", true).get().then(data=>{
-      console.log("data",data);
-      data.forEach(val=>{
-        console.log("val.data()",val.data(),"val.id",val.id);
-        localStorage.setItem("roomid",val.id);
-        isRoomExist = true
-      })
-    })
-    if(!isRoomExist){
-
-      let obj = {
-        createdAt: Date.now(),
-        users: {
-          [friendId]: true,
-          [uid]: true,
-        },
-      };
-      
-      db.collection("chatRooms")
-      .add(obj)
-      .then((data) => {
-       
-        localStorage.setItem("roomid",data.id);
-      })
-      .catch((error) => {
-        console.log("error", error);
+    .get()
+    .then((room) => {
+      console.log("room", room);
+      room.forEach((val) => {
+        localStorage.setItem("roomId", val.id);
+        roomExist = {
+          data: val.data(),
+          id: val.id,
+        };
       });
-    }
+
+      if (!roomExist) {
+        const obj = {
+          createdAt: Date.now(),
+          users: {
+            [uid]: true,
+            [friendId]: true,
+          },
+        };
+        db.collection("chatRooms")
+          .add(obj)
+          .then((data) => {
+            console.log("data ====> ==", data);
+            localStorage.setItem("roomId", data.id);
+          })
+          .catch((error) => {
+            console.log("error ===>", error);
+          });
+      }
+    });
 };
 
-let sendMessage = async () => {
-  let roomId = localStorage.getItem("roomid");
-  let msg = document.getElementById("msg").value;
-  let { uid } = await currentUser();
+const sendMessage = async () => {
+  let roomId = localStorage.getItem("roomId");
+  let text = document.getElementById("msg_text");
+  let { uid } = await dashboardAuth();
 
   let obj = {
-    message: msg,
+    message: text.value,
+    userId: uid,
     timestamp: Date.now(),
-    senderId: uid
-
-  }
-
+  };
   db.collection("chatRooms").doc(roomId).collection("messages").add(obj);
-}
-let getMessages = async () => {
-  let roomId = localStorage.getItem("roomid");
-  let { uid } = await currentUser();
+};
 
-  let chatContainer = document.getElementById("chat-cont")
- 
-  db.collection("chatRooms").doc(roomId).collection("messages").orderBy('timestamp').onSnapshot(msgs=>{
-    chatContainer.innerHTML = null
-    msgs.forEach(val=>{
-      console.log("msgs",val.data())
-      if(val.data().senderId === uid){
-
-        chatContainer.innerHTML += `
-        <div class="user-msg">
-        <p>${val.data().message}</p>
-        </div>
-        `
-      }else{
-        chatContainer.innerHTML += `
-        <div class="friend-msg">
-        <p>${val.data().message}</p>
-      </div>
-        `
-      }
-    })
-    let cont1 = document.getElementById("scroll-bottom");
-    cont1.scrollTop = cont1.scrollHeight
-  })
-  
-}
-
+const getMessages = async () => {
+  let roomId = localStorage.getItem("roomId");
+  let cont = document.getElementById("chat_containerId");
+  let { uid } = await dashboardAuth();
+  db.collection("chatRooms")
+    .doc(roomId)
+    .collection("messages")
+    .orderBy("timestamp")
+    .onSnapshot((doc) => {
+      cont.innerHTML = `<span></span>`
+      doc.forEach((val) => {
+        console.log("===", val.data());
+        if (val.data().userId === uid) {
+          cont.innerHTML += `
+                    <div class="container darker">
+                   <p>${val.data().message}</p>
+                 </div>`;
+          return;
+        }
+        cont.innerHTML += `
+      <div class="container">
+                  <p>${val.data().message}</p>
+                </div>
+      `;
+      });
+      var objDiv = document.getElementById("tt");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    });
+};
+console.log("====>", auth.currentUser);

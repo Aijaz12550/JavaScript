@@ -16,11 +16,8 @@ let getSources = () => {
         console.log("data",data);
         sourcesList.innerHTML = data.sources.map((val,key)=>{
             return `
-<<<<<<< HEAD
             <option onclick = "console.log('id', ${val.id})">${val.name}</option>
-=======
             <option value="${val.id}" >${val.name}</option>
->>>>>>> 6b11671fdb0b756df708343ebc16fb723cd36194
             `
         })
     })
@@ -46,17 +43,14 @@ fetch(`${baseurl}/articles?source=${source}&apikey=${apiKey}`)
 })
 }
 
-<<<<<<< HEAD
 // document.getElementById("select").addEventListener("click", e=>{
 //     console.log("e", e.target);
 //     updateNews(e.target.key);
 // })
-=======
 sourcesList.addEventListener("click", event => {
     console.log("event",event.target.value);
     updateNews(event.target.value)
 })
->>>>>>> 6b11671fdb0b756df708343ebc16fb723cd36194
 
 let updateSources = (source) =>{
 
